@@ -1,35 +1,50 @@
 import { FC, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 
 interface LoginInfoType {
   username: string;
   password: string;
+  fullname: string;
+  role: "user" | " admin";
 }
 interface LoginScreenPropType {}
 
-export const LoginScreen: FC<LoginScreenPropType> = () => {
+export const RegistrationScreen: FC<LoginScreenPropType> = () => {
   const navigate = useNavigate();
   const [loginInfo, setLoginInfo] = useState<LoginInfoType>({
     username: "",
     password: "",
+    fullname: "",
+    role: "user",
   });
 
   const handleOnChange = (e: any) => {
     const { value, name } = e.target || {};
-    if (name === "username") {
-      setLoginInfo({ ...loginInfo, username: value });
-    } else {
-      setLoginInfo({ ...loginInfo, password: value });
+    switch (name) {
+      case "username":
+        setLoginInfo({ ...loginInfo, username: value });
+        break;
+      case "fullname":
+        setLoginInfo({ ...loginInfo, fullname: value });
+        break;
+      case "role":
+        setLoginInfo({ ...loginInfo, role: value });
+        break;
+
+      default:
+        break;
     }
   };
 
-  const handleOnClickRegister = () => {
-     navigate("/register")
-  };
+  const handleSubmit = () => { };
+  
+  const handleOnClickLogin = () => { 
+     navigate("/");
+  }
 
   return (
     <>
-      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-16 lg:px-8 bg-black h-full">
+      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 bg-black h-full">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
             className="mx-auto h-10 w-auto"
@@ -37,7 +52,7 @@ export const LoginScreen: FC<LoginScreenPropType> = () => {
             alt="Your Company"
           />
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-white">
-            Login to your OpinionGate Account
+            Register in OpinionGate account
           </h2>
         </div>
 
@@ -50,7 +65,6 @@ export const LoginScreen: FC<LoginScreenPropType> = () => {
               >
                 Username
               </label>
-
               <div className="mt-2">
                 <input
                   id="username"
@@ -58,6 +72,27 @@ export const LoginScreen: FC<LoginScreenPropType> = () => {
                   type="text"
                   required
                   value={loginInfo.username}
+                  onChange={handleOnChange}
+                  className="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label
+                htmlFor="fileName"
+                className="block text-sm font-medium leading-6 text-white"
+              >
+                Full Name
+              </label>
+
+              <div className="mt-2">
+                <input
+                  id="fullname"
+                  name="fullname"
+                  type="text"
+                  required
+                  value={loginInfo.fullname}
                   onChange={handleOnChange}
                   className="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
                 />
@@ -85,24 +120,47 @@ export const LoginScreen: FC<LoginScreenPropType> = () => {
                 />
               </div>
             </div>
+            <div>
+              <div className="flex items-center justify-between">
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-medium leading-6 text-white"
+                >
+                  Select Your Role
+                </label>
+              </div>
+              <div className="mt-2">
+                <select
+                  className="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
+                  onChange={handleOnChange}
+                  name="role"
+                  required
+                  value={loginInfo.role}
+                >
+                  <option value="user">User</option>
+                  <option value="admin">Admin</option>
+                </select>
+              </div>
+            </div>
 
             <div>
               <button
+                onClick={handleSubmit}
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-indigo-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
               >
-                Sign in
+                Register
               </button>
             </div>
           </form>
 
           <p className="mt-10 text-center text-sm text-gray-400">
-            Not a member?{" "}
+            Already Register?{" "}
             <button
-              onClick={handleOnClickRegister}
+              onClick={handleOnClickLogin}
               className="font-semibold leading-6 text-indigo-400 hover:text-indigo-300"
             >
-              Register now!
+              Login now!
             </button>
           </p>
         </div>
