@@ -1,6 +1,5 @@
 import reducers from "../ducks";
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import logger from "redux-logger";
 import { useDispatch } from "react-redux";
 import storage from "redux-persist/lib/storage";
 import {
@@ -12,11 +11,12 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
+import logger from "redux-logger";
 
 const persistConfig = {
-  key: "config",
+  key: "auth",
   storage,
-  whitelist: ["config"],
+  whitelist: ["auth"],
 };
 
 const rootReducer = combineReducers({ ...reducers });
@@ -36,7 +36,7 @@ export const store = configureStore({
 export const dispatch = store.dispatch;
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
-export type RootState = ReturnType<typeof store.getState>;
+export type RootState = ReturnType<any>;
 
 // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
 export type AppDispatch = typeof store.dispatch;

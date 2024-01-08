@@ -1,8 +1,14 @@
 import { FC, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import authService from "@/services/auth-service/auth-service";
+import { toast } from "react-toastify";
+import { dispatch } from "@/state/store";
+import authThunk from "@/state/ducks/auth/thunks";
+
+
 interface LoginInfoType {
-  username: string;
+  userName: string;
   password: string;
 }
 interface LoginScreenPropType {}
@@ -10,22 +16,37 @@ interface LoginScreenPropType {}
 export const LoginScreen: FC<LoginScreenPropType> = () => {
   const navigate = useNavigate();
   const [loginInfo, setLoginInfo] = useState<LoginInfoType>({
-    username: "",
+    userName: "",
     password: "",
   });
 
   const handleOnChange = (e: any) => {
     const { value, name } = e.target || {};
     if (name === "username") {
-      setLoginInfo({ ...loginInfo, username: value });
+      setLoginInfo({ ...loginInfo, userName: value });
     } else {
       setLoginInfo({ ...loginInfo, password: value });
     }
   };
 
-  const handleOnClickRegister = () => {
-     navigate("/register")
+  const handleSubmit = (event: any) => {
+   event.preventDefault();
+    authService.userLogin({ ...loginInfo }).then((res: any) => {
+     if (res.data) {
+       const { accessToken, refreshToken } = res.data.data || {};
+        toast.success("LoginSuccessfully...!");
+       localStorage.setItem("accessToken", accessToken);
+       localStorage.setItem("refreshToken", refreshToken);
+       dispatch(authThunk.setLoginThunk(true));
+
+      }
+   })
+   
   };
+  
+  const handleOnClickRegister = () => { 
+    navigate("/register");
+  }
 
   return (
     <>
@@ -42,7 +63,7 @@ export const LoginScreen: FC<LoginScreenPropType> = () => {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" action="#" method="POST">
+          <form className="space-y-6" onSubmit={handleSubmit} method="POST">
             <div>
               <label
                 htmlFor="username"
@@ -57,7 +78,7 @@ export const LoginScreen: FC<LoginScreenPropType> = () => {
                   name="username"
                   type="text"
                   required
-                  value={loginInfo.username}
+                  value={loginInfo.userName}
                   onChange={handleOnChange}
                   className="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
                 />
@@ -81,6 +102,7 @@ export const LoginScreen: FC<LoginScreenPropType> = () => {
                   autoComplete="current-password"
                   required
                   value={loginInfo.password}
+                  onChange={handleOnChange}
                   className="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
                 />
               </div>
