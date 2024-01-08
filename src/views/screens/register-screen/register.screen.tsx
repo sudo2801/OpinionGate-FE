@@ -1,5 +1,4 @@
 import authService from "@/services/auth-service/auth-service";
-import { useAppDispatch } from "@/state/store/store";
 import { withLayout } from "@/views/hoc/with-layout";
 import { FC, useState } from "react";
 import { useNavigate } from "react-router-dom";

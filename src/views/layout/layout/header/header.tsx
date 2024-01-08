@@ -1,4 +1,4 @@
-import { FC, memo, useState } from "react";
+import { FC, memo } from "react";
 import { HeaderProps } from "./header.type";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
