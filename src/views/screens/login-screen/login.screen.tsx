@@ -5,6 +5,7 @@ import authService from "@/services/auth-service/auth-service";
 import { toast } from "react-toastify";
 import { dispatch } from "@/state/store";
 import authThunk from "@/state/ducks/auth/thunks";
+import { withLayout } from "@/views/hoc/with-layout";
 
 interface LoginInfoType {
   userName: string;
@@ -13,7 +14,7 @@ interface LoginInfoType {
 
 interface LoginScreenPropType {}
 
-export const LoginScreen: FC<LoginScreenPropType> = () => {
+export const LoginScreen: FC<LoginScreenPropType> = withLayout(() => {
   const navigate = useNavigate();
   const [loginInfo, setLoginInfo] = useState<LoginInfoType>({
     userName: "",
@@ -38,8 +39,8 @@ export const LoginScreen: FC<LoginScreenPropType> = () => {
         localStorage.setItem("accessToken", accessToken);
         localStorage.setItem("refreshToken", refreshToken);
         dispatch(authThunk.setLoginThunk(true));
-        dispatch(authThunk.setUserThunk(user))
-        const userId = user?._id
+        dispatch(authThunk.setUserThunk(user));
+        const userId = user?._id;
         navigate(`/feedback/${userId}`, { state: { isLogin: true } });
       }
     });
@@ -51,7 +52,7 @@ export const LoginScreen: FC<LoginScreenPropType> = () => {
 
   return (
     <>
-      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-16 lg:px-8 bg-black h-full">
+      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-16 lg:px-8 bg-black h-full overflow-hidden">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
             className="mx-auto h-10 w-auto"
@@ -132,4 +133,4 @@ export const LoginScreen: FC<LoginScreenPropType> = () => {
       </div>
     </>
   );
-};
+});

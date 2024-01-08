@@ -1,5 +1,6 @@
 import authService from "@/services/auth-service/auth-service";
 import { useAppDispatch } from "@/state/store/store";
+import { withLayout } from "@/views/hoc/with-layout";
 import { FC, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -12,7 +13,7 @@ interface LoginInfoType {
 }
 interface LoginScreenPropType {}
 
-export const RegistrationScreen: FC<LoginScreenPropType> = () => {
+export const RegistrationScreen: FC<LoginScreenPropType> = withLayout(() => {
   const navigate = useNavigate();
   const [loginInfo, setLoginInfo] = useState<LoginInfoType>({
     fullName: "",
@@ -45,12 +46,12 @@ export const RegistrationScreen: FC<LoginScreenPropType> = () => {
     event.preventDefault();
     authService.userRegistration({ ...loginInfo })
       .then((res: any) => {
-      if (res?.data) {
-        toast.success("User register Successfully");
-        navigate("/");
-      }
+        if (res?.data) {
+          toast.success("User register Successfully");
+          navigate("/");
+        }
       })
-      .catch(()=>{});
+      .catch(() => { });
   };
 
   const handleOnClickLogin = () => {
@@ -183,4 +184,4 @@ export const RegistrationScreen: FC<LoginScreenPropType> = () => {
       </div>
     </>
   );
-};
+});

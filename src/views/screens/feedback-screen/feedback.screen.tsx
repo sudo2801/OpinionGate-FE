@@ -1,15 +1,11 @@
 import { FC, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
-import authService from "@/services/auth-service/auth-service";
-import { toast } from "react-toastify";
-import { dispatch } from "@/state/store";
-import authThunk from "@/state/ducks/auth/thunks";
+
 import { withLayout } from "@/views/hoc/with-layout";
-import { Button } from "@mui/material";
-import SendIcon from "@mui/icons-material/Send";
+
 import Modalpopup from "@/views/components/modal/model";
-import { CToast } from "@/views/components/shared/toast";
+
 import FeedbackContainer from "@/views/components/feedback-container/feedback-container";
 import feedbackService from "@/services/feedback-service/feedback.service";
 

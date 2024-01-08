@@ -33,7 +33,7 @@ const userRegistration = async (payload: userRegistrationPayload) => {
 };
 
 const userLogout = async () => {
-  const endPoint = `${endPoints.API_V1}${endPoints.user.LOGIN}`;
+  const endPoint = `${endPoints.API_V1}${endPoints.user.LOGOUT}`;
 
   const response = await apiService
     .get({ url: endPoint })
