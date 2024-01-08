@@ -6,7 +6,7 @@ export const endPoints = {
     LOGOUT: "/users/logout",
   },
   feedback: {
-    login: "/user/login",
+    CREATE_FEEDBACK: "/feedback/create",
     REGISTRATION: "/users/register",
   },
 };

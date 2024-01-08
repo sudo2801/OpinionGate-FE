@@ -4,7 +4,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch } from '@/state/store';
 
 const {
-  actions: { setLoggedIn },
+  actions: { setLoggedIn, setUser },
 } = slice;
 
 const userLoginThunk = createAsyncThunk(
@@ -19,6 +19,10 @@ const setLoginThunk = (payload:boolean) => (dispatch: AppDispatch) => {
   dispatch(setLoggedIn(payload));
 };
 
+const setUserThunk = (payload: any) => (dispatch: AppDispatch) => {
+  dispatch(setUser(payload));
+};
+
 const registerThunk = createAsyncThunk(
   "auth/register",
   async (payload: userRegistrationPayload) => {
@@ -28,6 +32,11 @@ const registerThunk = createAsyncThunk(
 );
 
 
-const authThunk = { userLoginThunk,setLoginThunk, registerThunk };
+const authThunk = {
+  userLoginThunk,
+  setLoginThunk,
+  registerThunk,
+  setUserThunk,
+};
 
 export default authThunk;

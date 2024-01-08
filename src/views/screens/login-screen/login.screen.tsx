@@ -6,11 +6,11 @@ import { toast } from "react-toastify";
 import { dispatch } from "@/state/store";
 import authThunk from "@/state/ducks/auth/thunks";
 
-
 interface LoginInfoType {
   userName: string;
   password: string;
 }
+
 interface LoginScreenPropType {}
 
 export const LoginScreen: FC<LoginScreenPropType> = () => {
@@ -30,23 +30,24 @@ export const LoginScreen: FC<LoginScreenPropType> = () => {
   };
 
   const handleSubmit = (event: any) => {
-   event.preventDefault();
+    event.preventDefault();
     authService.userLogin({ ...loginInfo }).then((res: any) => {
-     if (res.data) {
-       const { accessToken, refreshToken } = res.data.data || {};
-        toast.success("LoginSuccessfully...!");
-       localStorage.setItem("accessToken", accessToken);
-       localStorage.setItem("refreshToken", refreshToken);
-       dispatch(authThunk.setLoginThunk(true));
-
+      if (res?.data) {
+        const { accessToken, refreshToken, user } = res.data.data || {};
+        toast("LoginSuccessfully...!");
+        localStorage.setItem("accessToken", accessToken);
+        localStorage.setItem("refreshToken", refreshToken);
+        dispatch(authThunk.setLoginThunk(true));
+        dispatch(authThunk.setUserThunk(user))
+        const userId = user?._id
+        navigate(`/feedback/${userId}`, { state: { isLogin: true } });
       }
-   })
-   
+    });
   };
-  
-  const handleOnClickRegister = () => { 
+
+  const handleOnClickRegister = () => {
     navigate("/register");
-  }
+  };
 
   return (
     <>

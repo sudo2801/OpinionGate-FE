@@ -1,17 +1,34 @@
-import { FC, memo } from "react";
+import { FC, memo, useState } from "react";
 import { HeaderProps } from "./header.type";
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
+import { AppBar, Box } from "@mui/material";
+
 
 export const Header: FC<HeaderProps> = memo(() => {
-  return (
-    <header className="sticky top-0 z-10 flex-shrink-0 flex h-16 shadow justify-center items-center">
-      <p
-        class="sm:text-4xl md:text-6xl font-extrabold bg-clip-text text-transparent
 
-            bg-[linear-gradient(to_right,theme(colors.indigo.400),theme(colors.indigo.100),theme(colors.sky.400),theme(colors.fuchsia.400))]"
-      >
-        ...QuickFace Detector...
-      </p>
-      {/* <span  class="text-6xl md:text-4xl font-extrabold bg-clip-text"> 🚀</span> */}
-    </header>
-  );
+    return (
+      <Box sx={{ flexGrow: 1 }}>
+        <AppBar position="static">
+          <Toolbar>
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              sx={{ mr: 2 }}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+              opiniongate
+            </Typography>
+            <Button color="inherit">Logout</Button>
+          </Toolbar>
+        </AppBar>
+      </Box>
+    );
 });
