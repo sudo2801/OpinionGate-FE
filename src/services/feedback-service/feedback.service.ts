@@ -1,11 +1,12 @@
 import { endPoints } from "@/constants/api-constant";
 import { apiService } from "../base-api";
 import { getErrorAndStatusFromErr } from "@/utils/handle-error";
+import { convertObjectToParams } from "@/utils/query";
 
 export interface createFeedback {
   customerName: string;
-    feedback: string;
-    userId:string
+  feedback: string;
+  userId: string;
 }
 
 export interface userRegistrationPayload {
@@ -13,6 +14,11 @@ export interface userRegistrationPayload {
   password: string;
   role: string;
   fullName: string;
+}
+
+export interface deleteQuery {
+  feedbackId: string;
+  userId: string;
 }
 
 const createFeedback = async (payload: createFeedback) => {
@@ -24,8 +30,26 @@ const createFeedback = async (payload: createFeedback) => {
   return response;
 };
 
+const getFeedback = async (userId: string) => {
+  const endPoint = `${endPoints.API_V1}${
+    endPoints.feedback.GET_FEEDBACK
+  }/${userId.trim()}`;
 
+  const response = await apiService
+    .get({ url: endPoint })
+    .catch((err: any) => getErrorAndStatusFromErr(err));
+  return response;
+};
 
+const deleteFeedback = async (query: deleteQuery) => {
+  const endPoint = `${endPoints.API_V1}${
+    endPoints.feedback.DELETE_FEEDBACK
+  }${convertObjectToParams(query)}`;
 
+  const response = await apiService
+    .delete({ url: endPoint })
+    .catch((err: any) => getErrorAndStatusFromErr(err));
+  return response;
+};
 
-export default { createFeedback };
+export default { createFeedback, getFeedback, deleteFeedback };

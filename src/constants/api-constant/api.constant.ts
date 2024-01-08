@@ -7,6 +7,7 @@ export const endPoints = {
   },
   feedback: {
     CREATE_FEEDBACK: "/feedback/create",
-    REGISTRATION: "/users/register",
+    GET_FEEDBACK: "/feedback/all",
+    DELETE_FEEDBACK: "/feedback/delete",
   },
 };
