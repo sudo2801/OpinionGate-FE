@@ -1,5 +1,6 @@
 import axios, { AxiosRequestConfig } from "axios";
 import { getToken } from ".";
+import { endPoints } from "@/constants/api-constant";
 
 const instance = axios.create({
   // "http://localhost:3000/"
@@ -27,7 +28,7 @@ instance.interceptors.response.use(
 
       try {
         const refreshToken = getToken("refreshToken");
-        const response = await axios.post("/api/refresh-token", {
+        const response = await axios.post(`${endPoints.API_V1}/${endPoints.user.REFRESH_TOKEN}`, {
           refreshToken,
         });
         const { accessToken } = response.data;

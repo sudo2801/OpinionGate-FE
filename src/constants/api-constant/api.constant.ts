@@ -4,6 +4,7 @@ export const endPoints = {
     LOGIN: "/users/login",
     REGISTRATION: "/users/register",
     LOGOUT: "/users/logout",
+    REFRESH_TOKEN: "/users/refresh-token",
   },
   feedback: {
     CREATE_FEEDBACK: "/feedback/create",
