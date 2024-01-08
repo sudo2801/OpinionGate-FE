@@ -1,6 +1,5 @@
-# Video Player with Face Detection (VPFaceDetection)
+# Opinio gate 
 
-Welcome to the Video Player with Face Detection project! This project combines the power of React, Fabric.js, and Face-api.js to create a video player with real-time facial detection.
 
 #Features
 
