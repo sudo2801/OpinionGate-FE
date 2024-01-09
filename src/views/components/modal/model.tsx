@@ -1,7 +1,6 @@
 import { FC, useState } from "react";
 
 import {
-  Button,
   Dialog,
   DialogActions,
   DialogContent,
