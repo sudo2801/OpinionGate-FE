@@ -33,7 +33,7 @@ export const FeedbackScreen: FC<LoginScreenPropType> = withLayout(() => {
   return (
     <>
       <div className="flex flex-col justify-center m-5 gap-3">
-        <Modalpopup />
+        <Modalpopup getFeedback={getFeedback} />
         <FeedbackContainer
           allFeedback={allFeedback}
           getFeedback={getFeedback}

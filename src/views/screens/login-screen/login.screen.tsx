@@ -60,7 +60,7 @@ export const LoginScreen: FC<LoginScreenPropType> = withLayout(() => {
             alt="Your Company"
           />
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-white">
-            Login to your OpinionGate Account
+            Login to your Opinion Gate Account
           </h2>
         </div>
 

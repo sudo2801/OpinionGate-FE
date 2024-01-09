@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FC, useState } from "react";
 
 import {
   Button,
@@ -15,13 +15,18 @@ import feedbackService from "@/services/feedback-service/feedback.service";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
-const Modalpopup = () => {
+interface ModalPopup {
+  getFeedback: Function;
+}
+const initialState = {
+  costumerName: "",
+  feedback: "",
+};
+const Modalpopup: FC<ModalPopup> = ({ getFeedback }) => {
   const params = useParams();
+
   const [open, openchange] = useState(false);
-  const [formInfo, setFormInfo] = useState({
-    costumerName: "",
-    feedback: "",
-  });
+  const [formInfo, setFormInfo] = useState(initialState);
 
   const handleOnChange = (e: any) => {
     const { value, name } = e.target || {};
@@ -44,18 +49,20 @@ const Modalpopup = () => {
     );
     if (!isValid) {
       toast.error("All filed required");
-      return
+      return;
     }
 
     feedbackService.createFeedback(payload).then((res: any) => {
       if (res.data && res.data.statusCode === 200) {
-        toast.success("Feedback submitted")
+        toast.success("Feedback submitted..!");
         openchange(false);
+        getFeedback();
         return;
       }
-      toast.error("something went wrong")
-       openchange(false);
-    }); 
+      toast.error("something went wrong");
+      openchange(false);
+    });
+    setFormInfo(initialState);
   };
 
   const functionopenpopup = () => {
@@ -65,12 +72,17 @@ const Modalpopup = () => {
   const closepopup = () => {
     openchange(false);
   };
+
   return (
     <div style={{ textAlign: "center" }}>
       <h1>MUI - DIALOG</h1>
-      <Button onClick={functionopenpopup} color="primary" variant="contained">
+      <button
+        onClick={functionopenpopup}
+        type="button"
+        className="rounded-md bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+      >
         Submit Your Feedback
-      </Button>
+      </button>
       <Dialog open={open} onClose={closepopup} fullWidth maxWidth="sm">
         <DialogTitle>
           Feedback form{" "}
@@ -98,9 +110,13 @@ const Modalpopup = () => {
               onChange={handleOnChange}
             />
 
-            <Button color="primary" variant="contained" onClick={handleOnClick}>
+            <button
+              onClick={handleOnClick}
+              type="button"
+              className="rounded-md bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+            >
               Submit
-            </Button>
+            </button>
           </Stack>
         </DialogContent>
         <DialogActions></DialogActions>

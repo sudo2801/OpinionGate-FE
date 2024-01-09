@@ -8,7 +8,7 @@ export const Layout: FC<LayoutProps> = memo(({ children }) => {
   const {pathname} = useLocation() 
 
   return (
-    <div className="w-screen h-screen bg-black">
+    <div className="w-screen h-screen bg-black overflow-auto">
       {(pathname !== "/" && pathname !== "/register") && <Header />}
       <CToast />
       {children}

@@ -22,7 +22,7 @@ export const Header: FC<HeaderProps> = memo(() => {
   };
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1 }} bgcolor={"red"}>
       <AppBar position="static">
         <Toolbar>
           <IconButton
