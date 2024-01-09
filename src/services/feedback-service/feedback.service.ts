@@ -52,4 +52,14 @@ const deleteFeedback = async (query: deleteQuery) => {
   return response;
 };
 
-export default { createFeedback, getFeedback, deleteFeedback };
+const UpdateFeedback = async ({ feedbackId, userId, feedback }: any) => {
+  const endPoint = `${endPoints.API_V1}${
+    endPoints.feedback.UPDATE_FEEDBACK
+  }${convertObjectToParams({ feedbackId, userId })}`;
+
+  const response = await apiService
+    .put({ url: endPoint, data: { feedback } })
+    .catch((err: any) => getErrorAndStatusFromErr(err));
+  return response;
+};
+export default { createFeedback, getFeedback, deleteFeedback, UpdateFeedback };

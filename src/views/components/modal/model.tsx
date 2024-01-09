@@ -17,7 +17,7 @@ import { toast } from "react-toastify";
 interface ModalPopup {
   getFeedback: Function;
 }
-const initialState = {
+export const initialState = {
   costumerName: "",
   feedback: "",
 };

@@ -10,5 +10,6 @@ export const endPoints = {
     CREATE_FEEDBACK: "/feedback/create",
     GET_FEEDBACK: "/feedback/all",
     DELETE_FEEDBACK: "/feedback/delete",
+    UPDATE_FEEDBACK: "/feedback/update",
   },
 };
