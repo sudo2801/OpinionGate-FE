@@ -1,14 +1,10 @@
 # Opinio gate 
 
 
-#Features
+# Features
 
-Video Upload: Users can upload a video using the input tag.
-Fabric.js Integration: Utilizes Fabric.js to manage the canvas and video elements.
-Face-api.js Integration: Implements facial detection within the video using Face-api.js.
-Video Player Interface: Design includes play/pause controls for a seamless user experience.
-Face Detection with Fabric.js: Draws rectangles around detected faces using Fabric.js.
-User Interaction: Real-time face detection on the canvas while playing the uploaded video
+Welcome to the Customer Feedback Application! This web application is designed to streamline the process of collecting and managing customer feedback. The application provides a user-friendly interface for customers to submit their feedback, and it offers an authentication system to ensure secure access and management of feedback data.
+
 
 ## Project Setup
 
