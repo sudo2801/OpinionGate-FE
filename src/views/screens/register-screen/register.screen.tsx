@@ -43,14 +43,16 @@ export const RegistrationScreen: FC<LoginScreenPropType> = withLayout(() => {
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
-    authService.userRegistration({ ...loginInfo })
-      .then((res: any) => {
-        if (res?.data) {
-          toast.success("User register Successfully");
-          navigate("/");
+    authService.userRegistration({ ...loginInfo }).then((res: any) => {
+      if (res?.data) {
+        toast.success("User register Successfully");
+        navigate("/");
+      } else {
+        if (res.status === 409) {
+          toast.error("Username is already exist.! Try with another username");
         }
-      })
-      .catch(() => { });
+      }
+    });
   };
 
   const handleOnClickLogin = () => {

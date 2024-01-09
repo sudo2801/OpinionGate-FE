@@ -35,13 +35,17 @@ export const LoginScreen: FC<LoginScreenPropType> = withLayout(() => {
     authService.userLogin({ ...loginInfo }).then((res: any) => {
       if (res?.data) {
         const { accessToken, refreshToken, user } = res.data.data || {};
-        toast("LoginSuccessfully...!");
+        toast.success("Login Successfully...!");
         localStorage.setItem("accessToken", accessToken);
         localStorage.setItem("refreshToken", refreshToken);
         dispatch(authThunk.setLoginThunk(true));
         dispatch(authThunk.setUserThunk(user));
         const userId = user?._id;
         navigate(`/feedback/${userId}`, { state: { isLogin: true } });
+      } else {
+        if (res.status === 404) {
+            toast.error("User Not found..!");
+         }
       }
     });
   };
@@ -82,7 +86,7 @@ export const LoginScreen: FC<LoginScreenPropType> = withLayout(() => {
                   required
                   value={loginInfo.userName}
                   onChange={handleOnChange}
-                  className="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6 p-1"
                 />
               </div>
             </div>
@@ -105,7 +109,7 @@ export const LoginScreen: FC<LoginScreenPropType> = withLayout(() => {
                   required
                   value={loginInfo.password}
                   onChange={handleOnChange}
-                  className="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6 p-1"
                 />
               </div>
             </div>

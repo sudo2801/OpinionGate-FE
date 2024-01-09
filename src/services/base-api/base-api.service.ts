@@ -3,8 +3,8 @@ import { getToken } from ".";
 import { endPoints } from "@/constants/api-constant";
 
 const instance = axios.create({
-  // "http://localhost:3000/"
-  baseURL: "https://opiniongate-production.up.railway.app/",
+  baseURL : "http://localhost:3000/"
+  // baseURL: "https://opiniongate-production.up.railway.app/",
 });
 
 instance.interceptors.request.use(
