@@ -3,7 +3,7 @@
 
 # Features
 
-Welcome to the Customer Feedback Application! This web application is designed to streamline the process of collecting and managing customer feedback. The application provides a user-friendly interface for customers to submit their feedback, and it offers an authentication system to ensure secure access and management of feedback data .
+Welcome to the Customer Feedback Application! This web application is designed to streamline the process of collecting and managing customer feedback. The application provides a user-friendly interface for customers to submit their feedback, and it offers an authentication system to ensure secure access and management of feedback data.
 
 
 ## Project Setup
